@@ -10,7 +10,9 @@ import android.support.v4.widget.DrawerLayout
 import android.support.design.widget.NavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.Menu
+import android.widget.TextView
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,6 +49,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+        }
+    }
+
+    override fun onChangedSearchText(text: String) {
+        super.onChangedSearchText(text)
+
+        val displayTextView = findViewById<TextView>(R.id.displayText)
+        if (text.isEmpty()) {
+            displayTextView.text = "Search text is empty"
+        } else {
+            displayTextView.text = text
         }
     }
 

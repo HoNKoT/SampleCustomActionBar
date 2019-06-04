@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import jp.honkot.samplecustomactionbar.databinding.AppBarMainBinding
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -33,6 +34,8 @@ abstract class BaseActivity : AppCompatActivity() {
             onChangedSearchText(s.toString())
         }
     }
+
+    private var savedSearchText: String = ""
 
     lateinit var toolbar: Toolbar
 
@@ -77,13 +80,28 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun switchSearchMode() {
+        // mode changed
         val turnOn = !searchMode.get()
         searchMode.set(turnOn)
+
+        // maintain search view
+        val searchView = findViewById<EditText>(R.id.searchAreaOnToolbar)
+        if (turnOn) {
+            // restore input text
+            searchView.setText(savedSearchText)
+        } else {
+            // save input text and reset input text
+            savedSearchText = searchView.text.toString()
+            searchView.setText("")
+        }
         onChangedSearchMode(turnOn)
     }
 
+    /**
+     * When tapped search clear icon.
+     * Its always in search mode.
+     */
     open fun onClickedSearchClear(view: View) {
-        findViewById<EditText>(R.id.searchAreaOnToolbar)?.setText("")
         switchSearchMode()
     }
 
