@@ -12,19 +12,16 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    override val label: String = getString(R.string.app_name)
+
+    override fun setContentView() {
+        setContentView(R.layout.activity_main)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // initialize toolbar
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        // remove default title text
-        toolbar.title = ""
-        // set toolbar as actionbar
-        setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
