@@ -14,7 +14,9 @@ import android.view.Menu
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    override val label: String = getString(R.string.app_name)
+    override val label: String get() = getString(R.string.app_name)
+
+    override val useSearchView: Boolean = true
 
     override fun setContentView() {
         setContentView(R.layout.activity_main)
@@ -60,6 +62,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_search -> {
+                switchSearchMode()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
