@@ -60,9 +60,14 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    open fun onChangedSearchMode(isSearchMode: Boolean) {
+        // nothing to do.
+    }
+
     fun switchSearchMode() {
         val turnOn = !searchMode.get()
         searchMode.set(turnOn)
+        onChangedSearchMode(isSearchMode)
     }
 
     override fun onBackPressed() {

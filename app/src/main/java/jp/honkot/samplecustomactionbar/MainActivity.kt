@@ -50,9 +50,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
+    var menu: Menu? = null
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        this.menu = menu
         return true
     }
 
@@ -68,6 +71,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onChangedSearchMode(isSearchMode: Boolean) {
+        super.onChangedSearchMode(isSearchMode)
+        menu?.findItem(R.id.action_search)?.isVisible = !isSearchMode
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
