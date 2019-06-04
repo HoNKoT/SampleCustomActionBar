@@ -18,7 +18,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // initialize toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+        // remove default title text
+        toolbar.title = ""
+        // set toolbar as actionbar
         setSupportActionBar(toolbar)
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
