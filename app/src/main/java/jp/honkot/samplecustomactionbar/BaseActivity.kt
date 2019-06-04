@@ -1,23 +1,13 @@
 package jp.honkot.samplecustomactionbar
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ObservableBoolean
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.View
-import android.view.WindowManager
-import android.widget.EditText
 import android.widget.TextView
 import jp.honkot.samplecustomactionbar.databinding.AppBarMainBinding
-import android.view.inputmethod.InputMethodManager
-import android.view.View.OnFocusChangeListener
-
-
-
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -26,8 +16,6 @@ abstract class BaseActivity : AppCompatActivity() {
     open val useSearchView: Boolean = false
 
     private val searchMode = ObservableBoolean(false)
-
-    val isSearchMode: Boolean get() = searchMode.get()
 
     lateinit var toolbar: Toolbar
 
@@ -67,7 +55,11 @@ abstract class BaseActivity : AppCompatActivity() {
     fun switchSearchMode() {
         val turnOn = !searchMode.get()
         searchMode.set(turnOn)
-        onChangedSearchMode(isSearchMode)
+        onChangedSearchMode(turnOn)
+    }
+
+    open fun onClickedSearchClear(view: View) {
+        switchSearchMode()
     }
 
     override fun onBackPressed() {
